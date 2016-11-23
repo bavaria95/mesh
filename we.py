@@ -17,6 +17,11 @@ class WE_Edge:
             self.id = WE_Edge.__i
             WE_Edge.__i += 1
 
+    def __repr__(self):
+        return "EDGE %s: from %s to %s. Faces %s and %s. Other edges: %s, %s, %s, %s" %\
+               (self.id, self.vert1, self.vert2, self.faceA, self.faceB, self.aPrev, 
+                self.aNext, self.bPrev, self.bNext)
+
 class WE_Vertex:
     __i = 0
 
@@ -34,6 +39,9 @@ class WE_Vertex:
     def add_edge(self, edge):
         self.edges.append(edge)
 
+    def __repr__(self):
+        return "VERTEX %s: (%s, %s), %s" % (self.id, self.x, self.y, self.edges)
+
 class WE_Face:
     __i = 0
 
@@ -45,4 +53,7 @@ class WE_Face:
         else:
             self.id = WE_Face.__i
             WE_Face.__i += 1
+
+    def __repr__(self):
+        return "FACE %s: %s" % (self.id, self.edges)
 
