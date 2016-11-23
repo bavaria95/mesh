@@ -21,7 +21,7 @@ def _find_or_create_edge(vert1, vert2, edges):
 
     return edge
 
-def construct_winged_edge(points, faces_orig):
+def construct_winged_edge(faces_orig):
     edges = []
     vertices = []
     faces = []

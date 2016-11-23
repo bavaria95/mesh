@@ -35,4 +35,4 @@ if __name__ == "__main__":
 
     # plt.show()
     
-    construct_winged_edge(points, faces)
+    construct_winged_edge(faces)

@@ -1,10 +1,13 @@
+from helper import *
+
 class WE_Edge:
     __i = 0
 
     def __init__(self, vert1, vert2, name=None):
         self.vert1 = vert1
         self.vert2 = vert2
-        self.faces = []
+        self.faceA = None
+        self.faceB = None
         self.aPrev = None
         self.aNext = None
         self.bPrev = None
@@ -16,16 +19,31 @@ class WE_Edge:
             self.id = WE_Edge.__i
             WE_Edge.__i += 1
 
+    def __face_orient(self, face):
+        for e in face.edges:
+            if e != self:
+                other_edge = e
+        
+        if other_edge.vert1 != self.vert1 and other_edge.vert1 != self.vert2:
+            p = other_edge.vert1
+        else:
+            p = other_edge.vert2
+
+        return orient(self.vert1, self.vert2, p)
+
     def add_face(self, face):
-        self.faces.append(face)
+        if self.__face_orient(face) == 1:
+            self.faceA = face
+        else:
+            self.faceB = face
 
     def __eq__(self, e):
         return (self.vert1 == e.vert1 and self.vert2 == e.vert2) or \
                (self.vert1 == e.vert2 and self.vert2 == e.vert1)
 
     def __repr__(self):
-        return "EDGE %s: from %s to %s, %s faces." %\
-               (self.id, self.vert1.id, self.vert2.id, len(self.faces))
+        return "EDGE %s: from %s to %s, faces: %s and %s." %\
+               (self.id, self.vert1.id, self.vert2.id, self.faceA, self.faceB)
 
 class WE_Vertex:
     __i = 0
