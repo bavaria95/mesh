@@ -15,5 +15,8 @@ class Point:
     def __eq__(self, a):
         return self.x == a.x and self.y == a.y
 
+    def __add__(self, a):
+        return Point(self.x + a.x, self.y + a.y)
+
     def __sub__(self, a):
         return Point(self.x - a.x, self.y - a.y)
