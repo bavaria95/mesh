@@ -11,3 +11,6 @@ class Point:
 
     def y(self):
         return self.y
+
+    def __eq__(self, b):
+        return self.x == b.x and self.y == b.y
