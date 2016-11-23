@@ -45,6 +45,7 @@ class WE_Edge:
         return "EDGE %s: from %s to %s, faces: %s and %s." %\
                (self.id, self.vert1.id, self.vert2.id, self.faceA, self.faceB)
 
+
 class WE_Vertex:
     __i = 0
 
@@ -68,6 +69,7 @@ class WE_Vertex:
     def __repr__(self):
         return "VERTEX %s: (%s, %s), %s" % (self.id, self.x, self.y, [x.id for x in self.edges])
 
+
 class WE_Face:
     __i = 0
 
@@ -82,4 +84,3 @@ class WE_Face:
 
     def __repr__(self):
         return "FACE %s: %s" % (self.id, [x.id for x in self.edges])
-
