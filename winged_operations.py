@@ -29,11 +29,9 @@ def winged_inc_faces(f, edges, vertices, faces):
 
     for t in level1:
         for e in t.edges:
-            if e.faceA and e.faceA != f:
-                if e.faceA not in level2:
-                    level2.append(e.faceA)
-            if e.faceB and e.faceB != f:
-                if e.faceB not in level2:
-                    level2.append(e.faceB)
+            if e.faceA and e.faceA != f and e.faceA not in level2:
+                level2.append(e.faceA)
+            if e.faceB and e.faceB != f and e.faceB not in level2:
+                level2.append(e.faceB)
 
     return (level1, level2)
