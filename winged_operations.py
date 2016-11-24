@@ -1,3 +1,6 @@
+from helper import *
+from point import *
+
 def winged_inc_vertexes(v, edges, vertices, faces):
     level1, level2 = [], []
 
@@ -36,5 +39,15 @@ def winged_inc_faces(f, edges, vertices, faces):
 
     return (level1, level2)
 
-def winged_cont_point(f, p, edges, vertices, faces):
-    pass
+def _vertices_of_face(face):
+    vx = []
+    for e in face.edges:
+        if e.vert1 not in vx:
+            vx.append(e.vert1)
+        if e.vert2 not in vx:
+            vx.append(e.vert2)
+
+    return vx
+
+def winged_face_contains_point(face, p, edges, vertices, faces):
+    f = face
