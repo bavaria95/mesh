@@ -35,3 +35,6 @@ def winged_inc_faces(f, edges, vertices, faces):
                 level2.append(e.faceB)
 
     return (level1, level2)
+
+def winged_cont_point(f, p, edges, vertices, faces):
+    pass

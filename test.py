@@ -45,5 +45,6 @@ if __name__ == "__main__":
     lvl1_v, lvl2_v = winged_inc_vertexes(v, w_edges, w_vertices, w_faces)
 
     f = w_faces[0]
-    print(f)
     lvl1_f = winged_inc_faces(f, w_edges, w_vertices, w_faces)
+
+    p = Point(5.0, 4.0)

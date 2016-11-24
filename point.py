@@ -12,6 +12,9 @@ class Point:
     def y(self):
         return self.y
 
+    def dist(self, a):
+        return ((self.x - a.x)**2 + (self.y - a.y)**2)**0.5
+
     def __eq__(self, a):
         return self.x == a.x and self.y == a.y
 
