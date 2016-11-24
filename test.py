@@ -39,8 +39,11 @@ if __name__ == "__main__":
     w_edges, w_vertices, w_faces = construct_winged_edge(faces)
     print('-'*80)
     h_edges, h_vertices, h_faces = construct_half_edge(faces)
+    print('-'*80)
 
     v = w_vertices[0]
     lvl1_v, lvl2_v = winged_inc_vertexes(v, w_edges, w_vertices, w_faces)
 
-    
+    f = w_faces[0]
+    print(f)
+    lvl1_f = winged_inc_faces(f, w_edges, w_vertices, w_faces)

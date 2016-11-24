@@ -82,5 +82,8 @@ class WE_Face:
             self.id = WE_Face.__i
             WE_Face.__i += 1
 
+    def __eq__(self, a):
+        return set([x.id for x in self.edges]) == set([x.id for x in a.edges])
+
     def __repr__(self):
         return "FACE %s: %s" % (self.id, [x.id for x in self.edges])

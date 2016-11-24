@@ -1,6 +1,5 @@
 def winged_inc_vertexes(v, edges, vertices, faces):
-    level1 = []
-    level2 = []
+    level1, level2 = [], []
 
     for e in v.edges:
         if e.vert1 == v:
@@ -16,5 +15,25 @@ def winged_inc_vertexes(v, edges, vertices, faces):
             else:
                 if e.vert1 not in level2 and e.vert1 != v:
                     level2.append(e.vert1)
+
+    return (level1, level2)
+
+def winged_inc_faces(f, edges, vertices, faces):
+    level1, level2 = [], []
+
+    for e in f.edges:
+        if e.faceA and e.faceA != f:
+            level1.append(e.faceA)
+        if e.faceB and e.faceB != f:
+            level1.append(e.faceB)
+
+    for t in level1:
+        for e in t.edges:
+            if e.faceA and e.faceA != f:
+                if e.faceA not in level2:
+                    level2.append(e.faceA)
+            if e.faceB and e.faceB != f:
+                if e.faceB not in level2:
+                    level2.append(e.faceB)
 
     return (level1, level2)
