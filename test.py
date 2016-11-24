@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from point import *
 from construct import *
+from winged_operations import *
 
 if __name__ == "__main__":
     filename = 'data.dat'
@@ -35,6 +36,11 @@ if __name__ == "__main__":
 
     # plt.show()
     
-    construct_winged_edge(faces)
+    w_edges, w_vertices, w_faces = construct_winged_edge(faces)
     print('-'*80)
-    construct_half_edge(faces)
+    h_edges, h_vertices, h_faces = construct_half_edge(faces)
+
+    v = w_vertices[0]
+    lvl1_v, lvl2_v = winged_inc_vertexes(v, w_edges, w_vertices, w_faces)
+
+    
