@@ -35,8 +35,10 @@ class WE_Edge:
     def add_face(self, face):
         if self.__face_orient(face) == 1:
             self.faceA = face
+            self.aPrev, self.aNext = filter(lambda x: x != self, face.edges)
         else:
             self.faceB = face
+            self.bPrev, self.bNext = filter(lambda x: x != self, face.edges)
 
     def __eq__(self, e):
         return (self.vert1 == e.vert1 and self.vert2 == e.vert2) or \

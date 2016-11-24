@@ -72,5 +72,3 @@ def winged_face_contains_point(face, p, edges, vertices, faces):
             f = e.faceB
         else:
             f = e.faceA
-
-
