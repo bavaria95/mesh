@@ -22,14 +22,38 @@ class HE_Vertex:
         return "VERTEX %s: (%s, %s), %s" % (self.id, self.x, self.y, self.half_edge)
 
 
+class HE_Edge:
+    __i = 0
+
+    def __init__(self, vertA, vertB, name=None):
+        self.vertA = vertA
+        self.vertB = vertB
+        self.half_edge = []
+
+        if name:
+            self.id = name
+        else:
+            self.id = HE_Edge.__i
+            HE_Edge.__i += 1
+
+    def add_half_edge(self, half_edge):
+        self.half_edge.append(half_edge)
+
+    def __eq__(self, a):
+        return (self.vertA == a.vertA and self.vertB == a.vertB) or\
+               (self.vertA == a.vertB and self.vertB == a.vertA)
+
+
 class HE_Half_Edge:
     __i = 0
 
-    def __init__(self, origin, name=None):
+    def __init__(self, edge, origin, name=None):
+        self.edge = edge
         self.origin = origin
         self.face = None
         self.prev = None
         self.next = None
+        self.twin = None
 
         if name:
             self.id = name
@@ -50,7 +74,8 @@ class HE_Half_Edge:
         self.next = next_e
 
     def __repr__(self):
-        return "EDGE %s, origin=%s, twin=(%s), prev=(%s), next=(%s)" % (self.id, self.origin.id, self.twin.id, self.prev.id if self.prev else None, self.next.id if self.next else None)
+        return "EDGE %s, origin=%s, twin=(%s), prev=(%s), next=(%s)" % (self.id, self.origin.id,
+                self.twin.id if self.twin else None, self.prev.id if self.prev else None, self.next.id if self.next else None)
 
 
 class HE_Face:
