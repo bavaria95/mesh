@@ -94,6 +94,8 @@ def _find_or_create_half_edges(vertA, vertB, half_edges, edges):
     edge.add_half_edge(he)
     edges.append(edge)
 
+    vertA.set_half_edge(he)
+
     if twin:
         he.set_twin(twin)
         twin.set_twin(he)
