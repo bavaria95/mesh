@@ -50,3 +50,29 @@ if __name__ == "__main__":
     p = Point(5.0, 4.0)
     f = w_faces[2]
     face_p = winged_face_contains_point(f, p, w_edges, w_vertices, w_faces)
+
+    face1 = w_faces[1]
+    face2 = w_faces[4]
+    print(face1)
+    print(face2)
+
+    # for e in edges:
+    #     print(e)
+    # print
+    # for v in vertices:
+    #     print(v)
+    # print
+    # for f in faces:
+    #     print(f)
+
+    winged_replace_diagonal(face1, face2, w_edges, w_vertices, w_faces)
+
+    print('-'*80)
+    for e in w_edges:
+        print(e)
+    print
+    for v in w_vertices:
+        print(v)
+    print
+    for f in w_faces:
+        print(f)

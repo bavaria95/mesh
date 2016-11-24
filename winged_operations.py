@@ -1,5 +1,6 @@
 from helper import *
 from point import *
+from winged_edge import *
 
 def winged_inc_vertexes(v, edges, vertices, faces):
     level1, level2 = [], []
@@ -72,3 +73,47 @@ def winged_face_contains_point(face, p, edges, vertices, faces):
             f = e.faceB
         else:
             f = e.faceA
+
+def winged_replace_diagonal(f1, f2, edges, vertices, faces):
+    e = [val for val in f1.edges if val in f2.edges]
+    if len(e) != 1:
+        raise "Faces are not incident"
+    e = e[0]
+
+    v1 = e.vert1
+    v2 = e.vert2
+
+    e1 = e.bPrev
+    e2 = e.bNext
+    e3 = e.aPrev
+    e4 = e.aNext
+
+    if e1.vert1 == v1:
+        v3 = e1.vert2
+    else:
+        v3 = e1.vert1
+
+    if e4.vert1 == v2:
+        v4 = e4.vert2
+    else:
+        v4 = e4.vert1
+
+    v1.edges.remove(e)
+    v2.edges.remove(e)
+
+    edges.remove(e)
+
+    faces.remove(f1)
+    faces.remove(f2)
+
+    e_new = WE_Edge(v3, v4)
+    edges.append(e_new)
+
+    f3 = WE_Face(e1, e3, e_new)
+    f4 = WE_Face(e2, e4, e_new)
+
+    faces.append(f3)
+    faces.append(f4)
+
+    e_new.add_face(f3)
+    e_new.add_face(f4)
