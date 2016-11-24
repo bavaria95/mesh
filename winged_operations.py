@@ -51,3 +51,26 @@ def _vertices_of_face(face):
 
 def winged_face_contains_point(face, p, edges, vertices, faces):
     f = face
+
+    while True:
+        vx = _vertices_of_face(f)
+        if inside_face(p, *vx):
+            return f
+        min_dist = 10e8
+        min_edge = None
+        for e in f.edges:
+            p1 = e.vert1
+            p2 = e.vert2
+            pm = p1 + p2
+            d = p.dist(Point(pm.x / 2, pm.y / 2))
+            if d < min_dist:
+                min_dist = d
+                min_edge = e
+        
+        e = min_edge
+        if e.faceA == f:
+            f = e.faceB
+        else:
+            f = e.faceA
+
+

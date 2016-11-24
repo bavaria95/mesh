@@ -1,3 +1,4 @@
+from point import *
 from helper import *
 
 class WE_Edge:
@@ -46,7 +47,7 @@ class WE_Edge:
                (self.id, self.vert1.id, self.vert2.id, self.faceA, self.faceB)
 
 
-class WE_Vertex:
+class WE_Vertex(Point):
     __i = 0
 
     def __init__(self, x, y, name=None):
