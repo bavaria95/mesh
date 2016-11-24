@@ -36,3 +36,5 @@ if __name__ == "__main__":
     # plt.show()
     
     construct_winged_edge(faces)
+    print('-'*80)
+    construct_half_edge(faces)

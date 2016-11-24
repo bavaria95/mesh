@@ -1,6 +1,7 @@
-from we import *
+from winged_edge import *
+from half_edge import *
 
-def _find_or_create_vertex(x, y, vertices):
+def _find_or_create_vertex_winged(x, y, vertices):
     for i in range(len(vertices)):
         if vertices[i].x == x and vertices[i].y == y:
             return vertices[i]
@@ -27,9 +28,9 @@ def construct_winged_edge(faces_orig):
     faces = []
 
     for f in faces_orig:
-        vertex0 = _find_or_create_vertex(f[0].x, f[0].y, vertices)
-        vertex1 = _find_or_create_vertex(f[1].x, f[1].y, vertices)
-        vertex2 = _find_or_create_vertex(f[2].x, f[2].y, vertices)
+        vertex0 = _find_or_create_vertex_winged(f[0].x, f[0].y, vertices)
+        vertex1 = _find_or_create_vertex_winged(f[1].x, f[1].y, vertices)
+        vertex2 = _find_or_create_vertex_winged(f[2].x, f[2].y, vertices)
         
         edge0 = _find_or_create_edge(vertex0, vertex1, edges)
         edge1 = _find_or_create_edge(vertex0, vertex2, edges)
@@ -67,3 +68,81 @@ def construct_winged_edge(faces_orig):
         print(f)
 
     return (edges, vertices, faces)
+
+
+
+def _find_or_create_vertex_half(x, y, vertices):
+    for i in range(len(vertices)):
+        if vertices[i].x == x and vertices[i].y == y:
+            return vertices[i]
+
+    vertex = HE_Vertex(x, y)
+    vertices.append(vertex)
+
+    return vertex 
+
+def _find_or_create_half_edges(vertA, vertB, half_edges):
+    for he in half_edges:
+        if he.origin == vertA and he.next and he.next.origin == vertB or\
+           he.origin == vertB and he.next and he.next.origin == vertA:
+            print(he, he.twin)
+            return (he, he.twin)
+
+    heA = HE_Half_Edge(vertA)
+    heB = HE_Half_Edge(vertB)
+    heA.set_twin(heB)
+    heB.set_twin(heA)
+
+    half_edges.append(heA)
+    half_edges.append(heB)
+
+    return (heA, heB)
+
+def construct_half_edge(faces_orig):
+    half_edges = []
+    vertices = []
+    faces = []
+
+    for f in faces_orig:
+        vertex0 = _find_or_create_vertex_half(f[0].x, f[0].y, vertices)
+        vertex1 = _find_or_create_vertex_half(f[1].x, f[1].y, vertices)
+        vertex2 = _find_or_create_vertex_half(f[2].x, f[2].y, vertices)
+
+        he01, he02 = _find_or_create_half_edges(vertex0, vertex1, half_edges)
+        he11, he12 = _find_or_create_half_edges(vertex2, vertex0, half_edges)
+        he21, he22 = _find_or_create_half_edges(vertex1, vertex2, half_edges)
+
+
+        he01.set_prev(he11)
+        he01.set_next(he21)
+
+        he11.set_prev(he21)
+        he11.set_next(he01)
+
+        he21.set_prev(he01)
+        he21.set_next(he11)
+
+        he02.set_prev(he22)
+        he02.set_next(he12)
+
+        he12.set_prev(he02)
+        he12.set_next(he22)
+
+        he22.set_prev(he12)
+        he22.set_next(he02)
+
+        face = HE_Face(he02)
+        faces.append(face)
+
+
+    for e in half_edges:
+        print(e)
+    print
+    for v in vertices:
+        print(v)
+    print
+    for f in faces:
+        print(f)
+
+    return (half_edges, vertices, faces)
+
