@@ -134,6 +134,10 @@ def construct_half_edge(faces_orig):
         face = HE_Face(he2)
         faces.append(face)
 
+        he0.set_face(face)
+        he1.set_face(face)
+        he2.set_face(face)
+
 
     for e in half_edges:
         print(e)

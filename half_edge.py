@@ -74,8 +74,8 @@ class HE_Half_Edge:
         self.next = next_e
 
     def __repr__(self):
-        return "EDGE %s, origin=%s, twin=(%s), prev=(%s), next=(%s)" % (self.id, self.origin.id,
-                self.twin.id if self.twin else None, self.prev.id if self.prev else None, self.next.id if self.next else None)
+        return "EDGE %s, orig=%s, twin=(%s), prev=(%s), next=(%s), face=(%s)" % (self.id, self.origin.id, self.twin.id if self.twin else '',
+                self.prev.id if self.prev else '', self.next.id if self.next else '', self.face.id if self.face else '')
 
 
 class HE_Face:
