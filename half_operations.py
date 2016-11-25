@@ -45,5 +45,6 @@ def half_inc_vertexes(v, edges, vertices, face):
         level2.extend(_half_vertex_neighbours(w))
 
     level2 = reduce(lambda l, x: l if x in l else l+[x], level2, [])
+    level2.remove(v)
 
     return (level1, level2)
