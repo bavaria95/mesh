@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from point import *
 from construct import *
 from winged_operations import *
+from half_operations import *
 
 if __name__ == "__main__":
     filename = 'data.dat'
@@ -54,3 +55,6 @@ if __name__ == "__main__":
     face1 = w_faces[1]
     face2 = w_faces[4]
     winged_replace_diagonal(face1, face2, w_edges, w_vertices, w_faces)
+
+    v = h_vertices[0]
+    lvl1_v, lvl2_v = half_inc_vertexes(v, w_edges, w_vertices, w_faces)
