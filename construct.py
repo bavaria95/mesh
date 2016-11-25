@@ -118,18 +118,18 @@ def construct_half_edge(faces_orig):
         if orient(vertex0, vertex1, vertex2) == 1:
             vertex0, vertex1 = vertex1, vertex0
 
-        he0 = _find_or_create_half_edges(vertex0, vertex1, half_edges, edges)
-        he1 = _find_or_create_half_edges(vertex2, vertex0, half_edges, edges)
-        he2 = _find_or_create_half_edges(vertex1, vertex2, half_edges, edges)
+        he0 = _find_or_create_half_edges(vertex1, vertex0, half_edges, edges)
+        he1 = _find_or_create_half_edges(vertex0, vertex2, half_edges, edges)
+        he2 = _find_or_create_half_edges(vertex2, vertex1, half_edges, edges)
 
-        he0.set_prev(he1)
-        he0.set_next(he2)
+        he0.set_prev(he2)
+        he0.set_next(he1)
 
-        he1.set_prev(he2)
-        he1.set_next(he0)
+        he1.set_prev(he0)
+        he1.set_next(he2)
 
-        he2.set_prev(he0)
-        he2.set_next(he1)
+        he2.set_prev(he1)
+        he2.set_next(he0)
 
         face = HE_Face(he2)
         faces.append(face)
