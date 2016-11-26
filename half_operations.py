@@ -90,11 +90,12 @@ def _edges_of_face(face):
 
 def half_face_contains_point(face, p, edges, vertices, faces):
     f = face
+    path = [f]
 
     while True:
         vx = [x.origin for x in _edges_of_face(f)]
         if inside_face(p, *vx):
-            return f
+            return path
         min_dist = 10e8
         min_edge = None
         for e in _edges_of_face(f):
@@ -108,3 +109,4 @@ def half_face_contains_point(face, p, edges, vertices, faces):
 
         e = min_edge.twin
         f = e.face
+        path.append(f)
