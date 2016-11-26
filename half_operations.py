@@ -116,7 +116,10 @@ def half_replace_diagonal(f1, f2, edges, vertices, faces):
     f1_edges = _edges_of_face(f1)
     f2_edges = _edges_of_face(f2)
 
-    e = [val for val in f1_edges if val in [e.twin for e in f2_edges]][0]
+    e = [val for val in f1_edges if val in [e.twin for e in f2_edges]]
+    if len(e) != 1:
+        raise Exception("Faces are not incident")
+    e = e[0]
 
     v1 = e.twin.origin
     v2 = e.origin

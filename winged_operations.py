@@ -79,7 +79,7 @@ def winged_face_contains_point(face, p, edges, vertices, faces):
 def winged_replace_diagonal(f1, f2, edges, vertices, faces):
     e = [val for val in f1.edges if val in f2.edges]
     if len(e) != 1:
-        raise "Faces are not incident"
+        raise Exception("Faces are not incident")
     e = e[0]
 
     v1 = e.vert1
