@@ -45,26 +45,26 @@ if __name__ == "__main__":
     v = w_vertices[0]
     lvl1_v, lvl2_v = winged_inc_vertexes(v, w_edges, w_vertices, w_faces)
 
-    f = w_faces[0]
-    lvl1_f, lvl2_f = winged_inc_faces(f, w_edges, w_vertices, w_faces)
-
-    p = Point(5.0, 3.9)
-    f = w_faces[2]
-    face_p = winged_face_contains_point(f, p, w_edges, w_vertices, w_faces)[-1]
-
-    face1 = w_faces[1]
-    face2 = w_faces[4]
-    winged_replace_diagonal(face1, face2, w_edges, w_vertices, w_faces)
-
     v = h_vertices[0]
     lvl1_v, lvl2_v = half_inc_vertexes(v, h_edges, h_vertices, h_faces)
+
+    f = w_faces[0]
+    lvl1_f, lvl2_f = winged_inc_faces(f, w_edges, w_vertices, w_faces)
 
     f = h_faces[0]
     lvl1_v, lvl2_v = half_inc_faces(f, h_edges, h_vertices, h_faces)
 
     p = Point(5.0, 3.9)
+    f = w_faces[2]
+    face_p = winged_face_contains_point(f, p, w_edges, w_vertices, w_faces)[-1]
+
+    p = Point(5.0, 3.9)
     f = h_faces[2]
     face_p = half_face_contains_point(f, p, h_edges, h_vertices, h_faces)[-1]
+
+    face1 = w_faces[1]
+    face2 = w_faces[4]
+    winged_replace_diagonal(face1, face2, w_edges, w_vertices, w_faces)
 
     face1 = h_faces[4]
     face2 = h_faces[1]

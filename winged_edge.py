@@ -1,6 +1,30 @@
 from point import *
 from helper import *
 
+class WE_Vertex(Point):
+    __i = 0
+
+    def __init__(self, x, y, name=None):
+        self.x = x
+        self.y = y
+        self.edges = []
+
+        if name:
+            self.id = name
+        else:
+            self.id = WE_Vertex.__i
+            WE_Vertex.__i += 1
+
+    def add_edge(self, edge):
+        self.edges.append(edge)
+
+    def __eq__(self, a):
+        return (self.x == a.x and self.y == a.y)
+
+    def __repr__(self):
+        return "VERTEX %s: (%s, %s), %s" % (self.id, self.x, self.y, [x.id for x in self.edges])
+
+
 class WE_Edge:
     __i = 0
 
@@ -47,30 +71,6 @@ class WE_Edge:
     def __repr__(self):
         return "EDGE %s: from %s to %s, faces: %s and %s." %\
                (self.id, self.vert1.id, self.vert2.id, self.faceA, self.faceB)
-
-
-class WE_Vertex(Point):
-    __i = 0
-
-    def __init__(self, x, y, name=None):
-        self.x = x
-        self.y = y
-        self.edges = []
-
-        if name:
-            self.id = name
-        else:
-            self.id = WE_Vertex.__i
-            WE_Vertex.__i += 1
-
-    def add_edge(self, edge):
-        self.edges.append(edge)
-
-    def __eq__(self, a):
-        return (self.x == a.x and self.y == a.y)
-
-    def __repr__(self):
-        return "VERTEX %s: (%s, %s), %s" % (self.id, self.x, self.y, [x.id for x in self.edges])
 
 
 class WE_Face:

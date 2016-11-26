@@ -58,7 +58,6 @@ def construct_winged_edge(faces_orig):
         edge2.add_face(face)
 
 
-
     for e in edges:
         print(e)
     print
