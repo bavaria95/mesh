@@ -52,11 +52,12 @@ def _vertices_of_face(face):
 
 def winged_face_contains_point(face, p, edges, vertices, faces):
     f = face
+    path = [f]
 
     while True:
         vx = _vertices_of_face(f)
         if inside_face(p, *vx):
-            return f
+            return path
         min_dist = 10e8
         min_edge = None
         for e in f.edges:
@@ -73,6 +74,7 @@ def winged_face_contains_point(face, p, edges, vertices, faces):
             f = e.faceB
         else:
             f = e.faceA
+        path.append(f)
 
 def winged_replace_diagonal(f1, f2, edges, vertices, faces):
     e = [val for val in f1.edges if val in f2.edges]

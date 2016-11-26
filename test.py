@@ -50,7 +50,7 @@ if __name__ == "__main__":
 
     p = Point(5.0, 3.9)
     f = w_faces[2]
-    face_p = winged_face_contains_point(f, p, w_edges, w_vertices, w_faces)
+    face_p = winged_face_contains_point(f, p, w_edges, w_vertices, w_faces)[-1]
 
     face1 = w_faces[1]
     face2 = w_faces[4]
