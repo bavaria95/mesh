@@ -52,7 +52,7 @@ if __name__ == "__main__":
     lvl1_f, lvl2_f = winged_inc_faces(f, w_edges, w_vertices, w_faces)
 
     f = h_faces[0]
-    lvl1_v, lvl2_v = half_inc_faces(f, h_edges, h_vertices, h_faces)
+    lvl1_f, lvl2_f = half_inc_faces(f, h_edges, h_vertices, h_faces)
 
     p = Point(5.0, 3.9)
     f = w_faces[2]
