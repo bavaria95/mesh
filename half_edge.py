@@ -1,4 +1,6 @@
-class HE_Vertex:
+from point import *
+
+class HE_Vertex(Point):
     __i = 0
 
     def __init__(self, x, y, name=None):
