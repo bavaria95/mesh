@@ -36,7 +36,7 @@ def _half_vertex_neighbours(v):
 
     return nodes
 
-def half_inc_vertexes(v, edges, vertices, face):
+def half_inc_vertexes(v, edges, vertices, faces):
     level1, level2 = [], []
 
     level1 = _half_vertex_neighbours(v)
