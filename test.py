@@ -57,7 +57,7 @@ if __name__ == "__main__":
     winged_replace_diagonal(face1, face2, w_edges, w_vertices, w_faces)
 
     v = h_vertices[0]
-    lvl1_v, lvl2_v = half_inc_vertexes(v, w_edges, w_vertices, w_faces)
+    lvl1_v, lvl2_v = half_inc_vertexes(v, h_edges, h_vertices, h_faces)
 
     f = h_faces[0]
-    lvl1_v, lvl2_v = half_inc_faces(f, w_edges, w_vertices, w_faces)
+    lvl1_v, lvl2_v = half_inc_faces(f, h_edges, h_vertices, h_faces)
