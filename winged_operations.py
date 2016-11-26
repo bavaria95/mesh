@@ -67,7 +67,7 @@ def winged_face_contains_point(face, p, edges, vertices, faces):
             if d < min_dist:
                 min_dist = d
                 min_edge = e
-        
+
         e = min_edge
         if e.faceA == f:
             f = e.faceB

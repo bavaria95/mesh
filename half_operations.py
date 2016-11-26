@@ -1,3 +1,6 @@
+from helper import *
+from point import *
+
 def _walk_thru(edge, reverse=False):
     e = edge
     visited_faces = []
@@ -74,3 +77,34 @@ def half_inc_faces(face, edges, vertices, faces):
         level2.remove(face)
 
     return (level1, level2)
+
+def _edges_of_face(face):
+    edges = []
+    e = face.half_edge
+
+    for i in range(3):
+        edges.append(e)
+        e = e.next
+
+    return edges
+
+def half_face_contains_point(face, p, edges, vertices, faces):
+    f = face
+
+    while True:
+        vx = [x.origin for x in _edges_of_face(f)]
+        if inside_face(p, *vx):
+            return f
+        min_dist = 10e8
+        min_edge = None
+        for e in _edges_of_face(f):
+            p1 = e.origin
+            p2 = e.next.origin
+            pm = p1 + p2
+            d = p.dist(Point(pm.x / 2, pm.y / 2))
+            if d < min_dist:
+                min_dist = d
+                min_edge = e
+
+        e = min_edge.twin
+        f = e.face

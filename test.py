@@ -48,7 +48,7 @@ if __name__ == "__main__":
     f = w_faces[0]
     lvl1_f, lvl2_f = winged_inc_faces(f, w_edges, w_vertices, w_faces)
 
-    p = Point(5.0, 4.0)
+    p = Point(5.0, 3.9)
     f = w_faces[2]
     face_p = winged_face_contains_point(f, p, w_edges, w_vertices, w_faces)
 
@@ -61,3 +61,8 @@ if __name__ == "__main__":
 
     f = h_faces[0]
     lvl1_v, lvl2_v = half_inc_faces(f, h_edges, h_vertices, h_faces)
+
+    p = Point(5.0, 3.9)
+    f = h_faces[2]
+    face_p = half_face_contains_point(f, p, h_edges, h_vertices, h_faces)
+    print(face_p)
