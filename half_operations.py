@@ -51,6 +51,7 @@ def half_inc_vertexes(v, edges, vertices, faces):
     level2 = reduce(lambda l, x: l if x in l else l+[x], level2, [])
     if v in level2:
         level2.remove(v)
+    level2 = filter(lambda p: p not in level1, level2)
 
     return (level1, level2)
 
