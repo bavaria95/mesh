@@ -77,6 +77,7 @@ def half_inc_faces(face, edges, vertices, faces):
     level2 = reduce(lambda l, x: l if x in l else l+[x], level2, [])
     if face in level2:
         level2.remove(face)
+    level2 = filter(lambda x: x not in level1, level2)
 
     return (level1, level2)
 

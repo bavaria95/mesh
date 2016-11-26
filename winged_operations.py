@@ -39,6 +39,7 @@ def winged_inc_faces(f, edges, vertices, faces):
             if e.faceB and e.faceB != f and e.faceB not in level2:
                 level2.append(e.faceB)
 
+    level2 = filter(lambda x: x not in level1, level2)
     return (level1, level2)
 
 def _vertices_of_face(face):
