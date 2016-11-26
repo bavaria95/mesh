@@ -111,6 +111,9 @@ def winged_replace_diagonal(f1, f2, edges, vertices, faces):
     e_new = WE_Edge(v3, v4)
     edges.append(e_new)
 
+    v3.add_edge(e_new)
+    v4.add_edge(e_new)
+
     f3 = WE_Face(e1, e3, e_new)
     f4 = WE_Face(e2, e4, e_new)
 
