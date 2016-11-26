@@ -1,5 +1,6 @@
 from helper import *
 from point import *
+from half_edge import *
 
 def _walk_thru(edge, reverse=False):
     e = edge
@@ -110,3 +111,67 @@ def half_face_contains_point(face, p, edges, vertices, faces):
         e = min_edge.twin
         f = e.face
         path.append(f)
+
+def half_replace_diagonal(f1, f2, edges, vertices, faces):
+    f1_edges = _edges_of_face(f1)
+    f2_edges = _edges_of_face(f2)
+
+    e = [val for val in f1_edges if val in [e.twin for e in f2_edges]][0]
+
+    v1 = e.twin.origin
+    v2 = e.origin
+
+    v3 = e.prev.origin
+    v4 = e.twin.prev.origin
+
+    new_full_edge = HE_Edge(v3, v4)
+
+    e_new = HE_Half_Edge(new_full_edge, v3)
+    e_new_twin = HE_Half_Edge(new_full_edge, v4)
+
+    new_full_edge.add_half_edge(e_new)
+    new_full_edge.add_half_edge(e_new_twin)
+
+    e_new.set_twin(e_new_twin)
+    e_new_twin.set_twin(e_new)
+
+    e_new.set_prev(e.next)
+    e_new.set_next(e.twin.prev)
+    e_new_twin.set_prev(e.twin.next)
+    e_new_twin.set_next(e.prev)
+
+    e.next.set_prev(e.twin.prev)
+    e.next.set_next(e_new)
+    e.twin.prev.set_prev(e_new)
+    e.twin.prev.set_next(e.next)
+    e.prev.set_prev(e_new_twin)
+    e.prev.set_next(e.twin.next)
+    e.twin.next.set_prev(e.prev)
+    e.twin.next.set_next(e_new_twin)
+
+
+    f3 = HE_Face(e_new)
+    f4 = HE_Face(e_new_twin)
+
+    e_new.set_face(f3)
+    e_new.next.set_face(f3)
+    e_new.next.next.set_face(f3)
+
+    e_new_twin.set_face(f4)
+    e_new_twin.next.set_face(f4)
+    e_new_twin.next.next.set_face(f4)
+
+    v1.set_half_edge(e_new.prev)
+    v2.set_half_edge(e_new_twin.prev)
+    v3.set_half_edge(e_new)
+    v4.set_half_edge(e_new_twin)
+
+    edges.remove(e)
+    edges.remove(e.twin)
+    edges.append(e_new)
+    edges.append(e_new_twin)
+
+    faces.remove(f1)
+    faces.remove(f2)
+    faces.append(f3)
+    faces.append(f4)

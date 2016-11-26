@@ -65,3 +65,7 @@ if __name__ == "__main__":
     p = Point(5.0, 3.9)
     f = h_faces[2]
     face_p = half_face_contains_point(f, p, h_edges, h_vertices, h_faces)[-1]
+
+    face1 = h_faces[4]
+    face2 = h_faces[1]
+    half_replace_diagonal(face1, face2, h_edges, h_vertices, h_faces)
