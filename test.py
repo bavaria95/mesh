@@ -65,4 +65,3 @@ if __name__ == "__main__":
     p = Point(5.0, 3.9)
     f = h_faces[2]
     face_p = half_face_contains_point(f, p, h_edges, h_vertices, h_faces)
-    print(face_p)

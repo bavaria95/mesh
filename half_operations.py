@@ -5,17 +5,17 @@ def _walk_thru(edge, reverse=False):
     e = edge
     visited_faces = []
     f = e.face
-    nodes = []
+    vertices = []
 
     while f not in visited_faces:
         visited_faces.append(f)
         e = e.next
         if reverse:
-            nodes.append(e.prev.origin)
+            vertices.append(e.prev.origin)
         else:
-            nodes.append(e.origin)
+            vertices.append(e.origin)
 
-        nodes.append(e.next.origin)
+        vertices.append(e.next.origin)
 
         if not reverse:
             e = e.next
@@ -25,19 +25,19 @@ def _walk_thru(edge, reverse=False):
             break
         f = e.face
 
-    return nodes
+    return vertices
 
 def _half_vertex_neighbours(v):
-    nodes = []
+    vertices = []
     e = v.half_edge
 
-    nodes.extend(_walk_thru(e))
+    vertices.extend(_walk_thru(e))
     if e.twin:
-        nodes.extend(_walk_thru(e.twin, reverse=True))
+        vertices.extend(_walk_thru(e.twin, reverse=True))
 
-    nodes = reduce(lambda l, x: l if x in l else l+[x], nodes, [])
+    vertices = reduce(lambda l, x: l if x in l else l+[x], vertices, [])
 
-    return nodes
+    return vertices
 
 def half_inc_vertexes(v, edges, vertices, faces):
     level1, level2 = [], []
